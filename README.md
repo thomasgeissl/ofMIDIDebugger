@@ -20,7 +20,7 @@ And as always you can clone it to your apps directory and build it by running ma
 * listen to incommig MIDI messages on port index 0: `ofMIDIDebugger -p 0`
 * listen to incommig MIDI messages on a virtual port: `ofMIDIDebugger -v virtualMIDIPort`
 * send a NOTEON of NOTEOFF message (channel NOTEON pitch velocity): `ofMIDIDebugger -v virtualMIDIPort -m "1 NOTEON 60 127"`
-* send a CC message (channel CC control): `ofMIDIDebugger -v virtualMIDIPort -m "1 CC 1"`
+* send a CC message (channel CC control value): `ofMIDIDebugger -v virtualMIDIPort -m "1 CC 1 127"`
 * send a PROGRAMCHANGE message (channel PROGRAMCHANGE control): `ofMIDIDebugger -v virtualMIDIPort -m "1 PROGRAMCHANGE 1"`
 * send a PITCHBEND message (channel PITCHBEND value): `ofMIDIDebugger -v virtualMIDIPort -m "1 PITCHBEND 127"`
 * TODO: sysex, aftertouch, polyaftertouch support

@@ -32,7 +32,7 @@ int main(int argc, char *argv[])
 	{
 		ofApp();
 	}
-	if (result.count("message") == 0)
+	if (result.count("message") == 0) // monitor
 	{
 		if (result.count("port") > 0)
 		{
@@ -43,7 +43,7 @@ int main(int argc, char *argv[])
 			ofRunApp(new ofApp(result["virtualPort"].as<std::string>()));
 		}
 	}
-	else
+	else // sender
 	{
 		if (result.count("port") > 0)
 		{

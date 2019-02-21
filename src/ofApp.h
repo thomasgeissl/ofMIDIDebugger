@@ -11,6 +11,7 @@ public:
   ofApp(std::string port);
   ofApp(int port, std::string message, bool interactive = false);
   ofApp(std::string virtualPort, std::string message, bool interactive = false);
+  ~ofApp();
   void update();
   void newMidiMessage(ofxMidiMessage & message);
   void sendMessage(std::string message);
