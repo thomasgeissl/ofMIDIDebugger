@@ -11,12 +11,13 @@ brew tap thomasgeissl/tools
 brew install ofmididebugger
 # brew upgrade ofmididebugger
 ```
-This will download the most recent version of the OSC debugger and add it to your search path.
+This will download the most recent version of the MIDI debugger and add it to your search path.
 
 ### Building
 And as always you can clone it to your apps directory and build it by running make.
 
 ## Usage
+* list available MIDI in and out ports: ` ofMIDIDebugger -l `
 * listen to incommig MIDI messages on port index 0: `ofMIDIDebugger -p 0`
 * listen to incommig MIDI messages on a virtual port: `ofMIDIDebugger -v virtualMIDIPort`
 * send a NOTEON of NOTEOFF message (channel NOTEON pitch velocity): `ofMIDIDebugger -v virtualMIDIPort -m "1 NOTEON 60 127"`
