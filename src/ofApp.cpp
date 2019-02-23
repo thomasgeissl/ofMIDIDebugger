@@ -43,6 +43,7 @@ ofApp::ofApp(int port, std::string message, bool interactive)
 ofApp::ofApp(std::string virtualPort, std::string message, bool interactive)
 {
     _midiOut.openVirtualPort(virtualPort);
+    ofLogNotice(_name) << "sending messages on " << virtualPort;
     sendMessage(message);
     if (interactive)
     {
@@ -59,6 +60,7 @@ ofApp::~ofApp()
 {
     _midiIn.closePort();
     _midiIn.removeListener(this);
+    _midiOut.closePort();
 }
 
 void ofApp::update()
@@ -68,6 +70,7 @@ void ofApp::newMidiMessage(ofxMidiMessage &message)
 {
     std::stringstream text;
     text << ofxMidiMessage::getStatusString(message.status);
+    text << " ";
 
     if (message.status < MIDI_SYSEX)
     {
@@ -113,9 +116,12 @@ void ofApp::sendMessage(std::string message)
     if (parts.size() == 3) // PC, PITCHBEND
     {
         auto value = ofToInt(parts[2]);
-        if(type == "PC" || type=="PROGRAMCHANGE"){
+        if (type == "PC" || type == "PROGRAMCHANGE")
+        {
             _midiOut.sendProgramChange(channel, value);
-        }else if(type == "PITCHBEND"){
+        }
+        else if (type == "PITCHBEND")
+        {
             _midiOut.sendPitchBend(channel, value);
         }
     }
@@ -130,7 +136,9 @@ void ofApp::sendMessage(std::string message)
         else if (type == "NOTEOFF")
         {
             _midiOut.sendNoteOff(channel, pitch, velocity);
-        }else if(type == "CC" || type=="CONTROLCHANGE"){
+        }
+        else if (type == "CC" || type == "CONTROLCHANGE")
+        {
             _midiOut.sendControlChange(channel, pitch, velocity); // channel, control, value
         }
     }

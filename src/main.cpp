@@ -51,7 +51,7 @@ int main(int argc, char *argv[])
 		}
 		else if (result.count("virtualPort") > 0)
 		{
-			ofRunApp(new ofApp(result["virutalPort"].as<std::string>(), result["message"].as<std::string>(), result["interactive"].as<bool>()));
+			ofRunApp(new ofApp(result["virtualPort"].as<std::string>(), result["message"].as<std::string>(), result["interactive"].as<bool>()));
 		}
 	}
 	return 0;
