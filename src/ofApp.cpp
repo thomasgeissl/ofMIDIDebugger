@@ -42,7 +42,11 @@ ofApp::ofApp(int port, std::string message, bool interactive)
 }
 ofApp::ofApp(std::string virtualPort, std::string message, bool interactive)
 {
-    _midiOut.openVirtualPort(virtualPort);
+    if(
+    !_midiOut.openVirtualPort(virtualPort)
+    ){
+        ofLogNotice() << "error";
+    }
     ofLogNotice(_name) << "sending messages on " << virtualPort;
     sendMessage(message);
     if (interactive)
@@ -125,7 +129,7 @@ void ofApp::sendMessage(std::string message)
             _midiOut.sendPitchBend(channel, value);
         }
     }
-    else if (parts.size() == 4) // NOTEON or NOTEOFF
+    else if (parts.size() == 4) // NOTEON, NOTEOFF or CC
     {
         auto pitch = ofToInt(parts[2]);
         auto velocity = ofToInt(parts[3]);
