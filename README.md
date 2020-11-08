@@ -40,8 +40,10 @@ The following types are supported by now:
 
 
 ## Changelog
-* 1.1.0: added record option
-* 1.0.0
+### 1.1.0
+* added record option
+### 1.0.0
+* first stable version
 
 ## License
 This software is distributed under the [MIT License](https://en.wikipedia.org/wiki/MIT_License), please note that dependencies might be released differently.
