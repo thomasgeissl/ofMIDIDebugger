@@ -24,6 +24,22 @@ ofApp::ofApp(std::string port)
     _midiIn.openVirtualPort(port);
     ofLogNotice(_name) << "listening on virtual port " << port;
 }
+ofApp::ofApp(int port, bool record, std::string outputPath) : _record(record), _outputPath(outputPath)
+{
+    // ofSetLogLevel(OF_LOG_VERBOSE);
+    // _midiIn.setVerbose(true);
+    _midiIn.addListener(this);
+    _midiIn.openPort(port);
+    ofLogNotice(_name) << "listening on port " << port;
+}
+ofApp::ofApp(std::string port, bool record, std::string outputPath) : _record(record), _outputPath(outputPath)
+{
+    // ofSetLogLevel(OF_LOG_VERBOSE);
+    // _midiIn.setVerbose(true);
+    _midiIn.addListener(this);
+    _midiIn.openVirtualPort(port);
+    ofLogNotice(_name) << "listening on virtual port " << port;
+}
 
 ofApp::ofApp(int port, std::string message, bool interactive)
 {
@@ -70,6 +86,13 @@ ofApp::~ofApp()
 void ofApp::update()
 {
 }
+void ofApp::exit()
+{
+    if (_record)
+    {
+        ofSaveJson(_outputPath, _messages);
+    }
+}
 void ofApp::newMidiMessage(ofxMidiMessage &message)
 {
     std::stringstream text;
@@ -101,6 +124,21 @@ void ofApp::newMidiMessage(ofxMidiMessage &message)
 
     text << "delta: " << message.deltatime;
     ofLogNotice(_name) << text.str();
+
+
+    if (_record)
+    {
+        ofJson messageJson;
+        messageJson["timeStamp"] = ofGetElapsedTimeMillis();
+        messageJson["channel"] = message.channel;
+        messageJson["status"] = message.status;
+        messageJson["pitch"] = message.pitch;
+        messageJson["velocity"] = message.velocity;
+        messageJson["control"] = message.control;
+        messageJson["value"] = message.value;
+
+        _messages.push_back(messageJson);
+    }
 }
 void ofApp::sendMessage(std::string message)
 {
