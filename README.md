@@ -2,6 +2,9 @@
 ## Description
 ofMIDIDebugger is command line tool to monitor and send MIDI messages.
 
+## Build status
+[![Build Status](https://travis-ci.com/thomasgeissl/ofMIDIDebugger.svg?branch=master)](https://travis-ci.com/thomasgeissl/ofMIDIDebugger)
+
 ## Installation
 ### OSX
 On OSX you can install it via brew.
@@ -19,7 +22,9 @@ And as always you can clone it to your apps directory and build it by running ma
 ## Usage
 * list available MIDI in and out ports: ` ofMIDIDebugger -l `
 * listen to incommig MIDI messages on port index 0: `ofMIDIDebugger -p 0`
+* listen to incommig MIDI messages on port index 0 and record sequence to file: `ofMIDIDebugger -p 0 -o output.json`
 * listen to incommig MIDI messages on a virtual port: `ofMIDIDebugger -v virtualMIDIPort`
+* listen to incommig MIDI messages on a virtual port and record sequence to file: `ofMIDIDebugger -v virtualMIDIPort -o output.json`
 * send a NOTEON of NOTEOFF message (channel NOTEON pitch velocity): `ofMIDIDebugger -v virtualMIDIPort -m "1 NOTEON 60 127"`
 * send a CC message (channel CC control value): `ofMIDIDebugger -v virtualMIDIPort -m "1 CC 1 127"`
 * send a PROGRAMCHANGE message (channel PROGRAMCHANGE control): `ofMIDIDebugger -v virtualMIDIPort -m "1 PROGRAMCHANGE 1"`
@@ -32,6 +37,11 @@ The following types are supported by now:
 * CC
 * PROGRAMCHANGE
 * PITCHBEND
+
+
+## Changelog
+* 1.1.0: added record option
+* 1.0.0
 
 ## License
 This software is distributed under the [MIT License](https://en.wikipedia.org/wiki/MIT_License), please note that dependencies might be released differently.
